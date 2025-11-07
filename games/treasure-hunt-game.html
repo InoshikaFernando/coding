@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Treasure Hunt Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(to bottom, #fff0b3, #ffd480);
+    }
+
+    h1 {
+      color: #b37400;
+    }
+
+    #gameArea {
+      margin-top: 30px;
+    }
+
+    .chest {
+      display: inline-block;
+      font-size: 60px;
+      margin: 20px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .chest:hover {
+      transform: scale(1.2);
+    }
+
+    #message {
+      font-size: 24px;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    #startBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff9900;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #startBtn:hover {
+      background-color: #ffb84d;
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 Treasure Hunt Game 🪙</h1>
+  <p>Click a chest to find the treasure!</p>
+
+  <button id="startBtn" onclick="startGame()">Start Game</button>
+
+  <div id="gameArea"></div>
+  <p id="message"></p>
+
+  <script>
+    let treasureBox = 0;
+
+    function startGame() {
+      // Hide the start button
+      document.getElementById("startBtn").style.display = "none";
+
+      document.getElementById("gameArea").innerHTML = "";
+      document.getElementById("message").innerText = "";
+      treasureBox = Math.floor(Math.random() * 3) + 1; // pick 1, 2, or 3
+
+      // Create 3 treasure chests
+      for (let i = 1; i <= 3; i++) {
+        let chest = document.createElement("div");
+        chest.innerHTML = "🧰";
+        chest.classList.add("chest");
+        chest.onclick = function() {
+          checkChest(i);
+        };
+        document.getElementById("gameArea").appendChild(chest);
+      }
+    }
+
+    function checkChest(chestNumber) {
+      if (chestNumber === treasureBox) {
+        document.getElementById("message").innerText = "🎉 You found the treasure! 💰";
+      } else {
+        document.getElementById("message").innerText = "💨 Oops! This chest is empty. Try again!";
+      }
+    }
+  </script>
+</body>
+</html>

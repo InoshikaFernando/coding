@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click Speed Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: lightyellow;
+      margin-top: 100px;
+    }
+
+    #startBtn, #clickBtn {
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+    }
+
+    #startBtn {
+      background-color: green;
+      color: white;
+    }
+
+    #clickBtn {
+      background-color: red;
+      color: white;
+      display: none;
+    }
+
+    #message {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 Click the Button Speed Game</h1>
+  <p>Click the red button as fast as you can when it appears!</p>
+
+  <button id="startBtn" onclick="startGame()">Start</button>
+  <button id="clickBtn" onclick="endGame()">Click Me!</button>
+
+  <p id="message"></p>
+
+  <script>
+    let startTime;
+
+    function startGame() {
+      document.getElementById("message").innerText = "Wait for it...";
+      document.getElementById("startBtn").disabled = true;
+
+      // Wait a random time between 2–5 seconds
+      const delay = Math.random() * 3000 + 2000;
+
+      setTimeout(() => {
+        document.getElementById("clickBtn").style.display = "inline-block";
+        document.getElementById("message").innerText = "CLICK NOW!";
+        startTime = Date.now();
+      }, delay);
+    }
+
+    function endGame() {
+      const reactionTime = (Date.now() - startTime) / 1000;
+      document.getElementById("message").innerText =
+        "⏱ Your time: " + reactionTime + " seconds!";
+      document.getElementById("clickBtn").style.display = "none";
+      document.getElementById("startBtn").disabled = false;
+    }
+  </script>
+</body>
+</html>

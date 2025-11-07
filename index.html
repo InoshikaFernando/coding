@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Coding Practice Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .concept-section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #4facfe;
+        }
+
+        .concept-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .concept-section p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .game-link {
+            display: block;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .game-link:hover {
+            border-color: #4facfe;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+        }
+
+        .game-link h3 {
+            margin-bottom: 10px;
+            color: #4facfe;
+        }
+
+        .game-link p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            border-color: #e9ecef;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>JavaScript Coding Practice Games</h1>
+            <p>Master JavaScript concepts through interactive games and exercises</p>
+        </div>
+
+        <div class="content">
+            <!-- Control Flow Section -->
+            <div class="concept-section">
+                <h2>🔄 Control Flow & Conditions</h2>
+                <p>Learn about if/else statements, switch cases, and conditional logic through interactive games.</p>
+                <div class="games-grid">
+                    <a href="single-if-condition-dice-roll.html" class="game-link">
+                        <h3>Single if condition - Dice roll game</h3>
+                        <p>Practice conditional statements with interactive scenarios</p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; text-align: left;">
+                            <li>Only one if–else — very clear logic</li>
+                            <li>Uses random numbers (Math.random())</li>
+                        </ul>
+                    </a>
+                    <a href="rock-paper-scissors-educational.html" class="game-link">
+                        <h3>Nested if-else - Rock Paper Scissors Game</h3>
+                        <p>Master nested if-else and logical operators</p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; text-align: left;">
+                            <li>Nested if-else statements</li>
+                            <li>Uses arrays to store choices</li>
+                            <li>Logical operators && (AND) and || (OR)</li>
+                        </ul>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Ternary Operator Game</h3>
+                        <p>Learn shorthand conditional expressions</p>
+                        <p>To be added</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Loops Section -->
+            <div class="concept-section">
+                <h2>🔄 Loops & Iteration</h2>
+                <p>Master for loops, while loops, and array iteration methods.</p>
+                <div class="games-grid">
+                    <a href="#" class="game-link coming-soon">
+                        <h3>For Loops Game</h3>
+                        <p>Practice counting and iteration with visual examples</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>While Loops Game</h3>
+                        <p>Learn conditional iteration and loop control</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Array Methods Game</h3>
+                        <p>Explore forEach, map, filter, and reduce</p>
+                        <p>To be added</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Math & Random Section -->
+            <div class="concept-section">
+                <h2>🎲 Math & Random Numbers</h2>
+                <p>Explore Math.random(), mathematical operations, and probability concepts.</p>
+                <div class="games-grid">
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Random Numbers Game</h3>
+                        <p>Generate and work with random values</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Lottery Number Generator</h3>
+                        <p>Build random number generators</p>
+                        <p>To be added</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Timing & Async Section -->
+            <div class="concept-section">
+                <h2>⏰ Timing & Asynchronous</h2>
+                <p>Learn setTimeout, setInterval, and asynchronous programming concepts.</p>
+                <div class="games-grid">
+                    <a href="click-the-button-educational.html" class="game-link">
+                        <h3>Click the Button Game</h3>
+                        <p>Practice delayed execution and timing</p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; text-align: left;">
+                            <li>Uses setTimeout() for delayed execution</li>
+                            <li>Math.random() creates unpredictable timing</li>
+                            <li>Measures reaction time with Date.now()</li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Functions Section -->
+            <div class="concept-section">
+                <h2>⚙️ Functions & Scope</h2>
+                <p>Master function declarations, arrow functions, and scope concepts.</p>
+                <div class="games-grid">
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Functions Game</h3>
+                        <p>Practice function creation and calling</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Arrow Functions Game</h3>
+                        <p>Learn modern function syntax</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Scope & Closures Game</h3>
+                        <p>Understand variable scope and closures</p>
+                        <p>To be added</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- DOM Manipulation Section -->
+            <div class="concept-section">
+                <h2>🎨 DOM Manipulation</h2>
+                <p>Learn to interact with HTML elements and create dynamic web pages.</p>
+                <div class="games-grid">
+                    <a href="#" class="game-link coming-soon">
+                        <h3>DOM Basics Game</h3>
+                        <p>Select and modify HTML elements</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Event Handling Game</h3>
+                        <p>Respond to user interactions</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Dynamic Content Game</h3>
+                        <p>Create and modify content dynamically</p>
+                        <p>To be added</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Advanced Concepts Section -->
+            <div class="concept-section">
+                <h2>🚀 Advanced Concepts</h2>
+                <p>Explore more complex JavaScript features and patterns.</p>
+                <div class="games-grid">
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Objects & Arrays Game</h3>
+                        <p>Work with complex data structures</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Promises & Async/Await</h3>
+                        <p>Handle asynchronous operations</p>
+                        <p>To be added</p>
+                    </a>
+                    <a href="#" class="game-link coming-soon">
+                        <h3>Classes & OOP Game</h3>
+                        <p>Object-oriented programming concepts</p>
+                        <p>To be added</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

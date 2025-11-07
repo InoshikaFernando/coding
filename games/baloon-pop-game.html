@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎈 Balloon Pop Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: "Comic Sans MS", sans-serif;
+      background: linear-gradient(to bottom, #aee1f9, #ffffff);
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #e91e63;
+      text-shadow: 2px 2px #fff;
+    }
+
+    #gameArea {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 20px;
+      justify-items: center;
+      align-items: center;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .balloon {
+      width: 70px;
+      height: 90px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      position: relative;
+      animation: floatUp 3s ease-in-out infinite;
+    }
+
+    .balloon:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    #score {
+      font-size: 24px;
+      color: #2c3e50;
+    }
+
+    #startBtn {
+      background-color: #4CAF50;
+      border: none;
+      padding: 12px 25px;
+      font-size: 20px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #startBtn:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+
+    .pop {
+      animation: pop 0.3s ease forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎈 Balloon Pop Game 🎉</h1>
+  <p>Pop the balloons before they disappear!</p>
+
+  <button id="startBtn" onclick="startGame()">Start Game</button>
+  <div id="gameArea"></div>
+  <p id="score">Score: 0</p>
+
+  <script>
+    let score = 0;
+    let totalBalloons = 25;
+    let gameRunning = false;
+
+    function startGame() {
+      const gameArea = document.getElementById("gameArea");
+      const startBtn = document.getElementById("startBtn");
+
+      // Hide start button
+      startBtn.style.display = "none";
+      gameRunning = true;
+
+      // Reset
+      gameArea.innerHTML = "";
+      score = 0;
+      document.getElementById("score").innerText = "Score: 0";
+
+      // Start showing balloons one by one
+      let balloonsShown = 0;
+      const showInterval = setInterval(() => {
+        if (balloonsShown >= totalBalloons) {
+          clearInterval(showInterval);
+          endGame();
+          return;
+        }
+        createBalloon(gameArea);
+        balloonsShown++;
+      }, 400); // every 0.4 seconds create a new balloon
+
+      // End the game after 15 seconds
+      setTimeout(() => {
+        clearInterval(showInterval);
+        endGame();
+      }, 15000);
+    }
+
+    function createBalloon(gameArea) {
+      let balloon = document.createElement("div");
+      balloon.className = "balloon";
+      balloon.style.backgroundColor = randomColor();
+      balloon.onclick = popBalloon;
+
+      gameArea.appendChild(balloon);
+
+      // Balloon disappears after random time
+      const disappearTime = 1500 + Math.random() * 1500;
+      const removeTimeout = setTimeout(() => {
+        if (balloon && balloon.parentNode && gameRunning) {
+          balloon.remove();
+        }
+      }, disappearTime);
+
+      balloon.dataset.timeout = removeTimeout;
+    }
+
+    function popBalloon() {
+      if (!gameRunning) return;
+      clearTimeout(this.dataset.timeout);
+      this.classList.add("pop");
+      setTimeout(() => this.remove(), 300);
+      score++;
+      document.getElementById("score").innerText = "Score: " + score;
+    }
+
+    function endGame() {
+      gameRunning = false;
+      document.getElementById("startBtn").style.display = "inline-block";
+      document.getElementById("gameArea").innerHTML = "";
+      alert("🎉 Game Over! Your score: " + score);
+    }
+
+    function randomColor() {
+      const colors = ["#ff5252", "#ffb300", "#4caf50", "#29b6f6", "#ba68c8", "#f06292"];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+</body>
+</html>

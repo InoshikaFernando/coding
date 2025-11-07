@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>Dice Roll Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: lightcyan;
+      margin-top: 100px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: darkblue;
+      color: white;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎲 Dice Roll Game</h1>
+  <p>Click the button to roll the dice!</p>
+  <button onclick="rollDice()">Roll</button>
+  <p id="result"></p>
+  <script>
+    function rollDice() {
+      let dice = Math.floor(Math.random() * 6) + 1; // random 1–6
+      let message = "You rolled a " + dice + ". ";
+      if (dice > 3) {
+        message += "🎉 You win!";
+      } else {
+        message += "💻 Computer wins!";
+      }
+
+      document.getElementById("result").innerHTML = message;
+    }
+  </script>
+</body>
+</html>

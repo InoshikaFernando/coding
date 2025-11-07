@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game - JavaScript Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .game-section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #4facfe;
+        }
+
+        .game-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        .iframe-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .question-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .question-section h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .question-section p {
+            color: #856404;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .answer-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .answer-button:hover {
+            background: #218838;
+        }
+
+        .answer-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .code-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .code-section.show {
+            display: block;
+        }
+
+        .code-section h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .code-textarea {
+            width: 100%;
+            height: auto;
+            min-height: 1000px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #2d3748;
+            color: #e2e8f0;
+            border: none;
+            border-radius: 6px;
+            padding: 15px;
+            resize: none;
+            line-height: 1.5;
+            overflow: visible;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #5a6268;
+        }
+
+        .concept-explanation {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .concept-explanation h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .concept-explanation ul {
+            color: #0066cc;
+            margin-left: 20px;
+        }
+
+        .concept-explanation li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✊ ✋ ✌ Rock Paper Scissors Game</h1>
+            <p>Learn arrays, nested if-else statements, and logical operators through classic gameplay</p>
+        </div>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to Games</a>
+
+            <div class="concept-explanation">
+                <h3>📚 What You'll Learn</h3>
+                <ul>
+                    <li><strong>Arrays</strong> - Store multiple values in a single variable</li>
+                    <li><strong>Nested if-else</strong> - Multiple conditions and complex decision making</li>
+                    <li><strong>Logical operators</strong> - && (AND) and || (OR) for combining conditions</li>
+                    <li><strong>Math.random()</strong> - Generate random computer choices</li>
+                    <li><strong>Function parameters</strong> - Pass data to functions</li>
+                    <li><strong>String concatenation</strong> - Build dynamic messages</li>
+                </ul>
+            </div>
+
+            <div class="game-section">
+                <h2>🎮 Play the Game</h2>
+                <p>Try the Rock Paper Scissors game below. Notice how it uses arrays, nested conditions, and logical operators!</p>
+                <p><strong>💡 Hint:</strong> The game uses an array to store choices, Math.random() to pick the computer's choice, and complex if-else statements with logical operators (&& and ||) to determine the winner!</p>
+                
+                <div class="iframe-container">
+                    <iframe src="games/rock-paper-scissors.html" title="Rock Paper Scissors Game"></iframe>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>🤔 Questions to Think About</h3>
+                <p><strong>1.</strong> How does the game store the three possible choices?</p>
+                <p><strong>2.</strong> What does the logical operator && (AND) do in the winning conditions?</p>
+                <p><strong>3.</strong> How many different conditions does the game check to determine a winner?</p>
+                <p><strong>4.</strong> What happens when playerChoice equals computerChoice?</p>
+                <p><strong>5.</strong> How does Math.floor(Math.random() * 3) work to pick a random choice?</p>
+                
+                <button class="answer-button" onclick="showAnswer()">Show Answer</button>
+            </div>
+
+            <div class="code-section" id="codeSection">
+                <h4>💻 The Code Behind the Game</h4>
+                <textarea class="code-textarea" readonly>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+</head>
+<body>
+  <h1>✊ ✋ ✌ Rock Paper Scissors</h1>
+  <p>Click a button to play against the computer!</p>
+  
+  <button onclick="play('rock')">Rock ✊</button>
+  <button onclick="play('paper')">Paper ✋</button>
+  <button onclick="play('scissors')">Scissors ✌</button>
+  
+  <p id="result"></p>
+
+  <script>
+    function play(playerChoice) {
+      const choices = ["rock", "paper", "scissors"];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+      let result = "You chose " + playerChoice + ". Computer chose " + computerChoice + ". ";
+
+      if (playerChoice === computerChoice) {
+        result += "It's a draw!";
+      } else if (
+        (playerChoice === "rock" && computerChoice === "scissors") ||
+        (playerChoice === "paper" && computerChoice === "rock") ||
+        (playerChoice === "scissors" && computerChoice === "paper")
+      ) {
+        result += "🎉 You win!";
+      } else {
+        result += "💻 Computer wins!";
+      }
+
+      document.getElementById("result").innerText = result;
+    }
+  </script>
+</body>
+</html>
+
+// Key Points:
+// 1. Arrays store multiple values: ["rock", "paper", "scissors"]
+// 2. Math.random() * 3 gives 0-2.999, Math.floor() rounds down to 0, 1, or 2
+// 3. Logical AND (&&) means BOTH conditions must be true
+// 4. Logical OR (||) means EITHER condition can be true
+// 5. Nested if-else checks: draw first, then winning conditions, then loss
+// 6. Function parameters let you pass data: play('rock')
+                </textarea>
+            </div>
+
+            <div class="question-section">
+                <h3>🎯 Try This Challenge</h3>
+                <p>Enhance the game with these modifications:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Add a score counter (wins, losses, draws)</li>
+                    <li>Create a reset button to start over</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAnswer() {
+            const codeSection = document.getElementById('codeSection');
+            const button = document.querySelector('.answer-button');
+            
+            if (codeSection.classList.contains('show')) {
+                codeSection.classList.remove('show');
+                button.textContent = 'Show Answer';
+            } else {
+                codeSection.classList.add('show');
+                button.textContent = 'Hide Answer';
+            }
+        }
+    </script>
+</body>
+</html>
