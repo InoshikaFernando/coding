@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guess Game - JavaScript Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .game-section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #667eea;
+        }
+
+        .game-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        .iframe-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .question-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .question-section h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .question-section p {
+            color: #856404;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .question-section ul {
+            color: #856404;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .question-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .answer-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .answer-button:hover {
+            background: #218838;
+        }
+
+        .answer-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .code-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .code-section.show {
+            display: block;
+        }
+
+        .code-section h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .code-textarea {
+            width: 100%;
+            height: auto;
+            min-height: 900px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #2d3748;
+            color: #e2e8f0;
+            border: none;
+            border-radius: 6px;
+            padding: 15px;
+            resize: none;
+            line-height: 1.5;
+            overflow: visible;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #5a6268;
+        }
+
+        .concept-explanation {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .concept-explanation h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .concept-explanation ul {
+            color: #0066cc;
+            margin-left: 20px;
+        }
+
+        .concept-explanation li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Number Guess Game</h1>
+            <p>Learn comparison operators and multi-branch conditional logic through interactive gameplay</p>
+        </div>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to Games</a>
+
+            <div class="concept-explanation">
+                <h3>📚 What You'll Learn</h3>
+                <ul>
+                    <li><strong>Math.random()</strong> - Generate random numbers for game secrets</li>
+                    <li><strong>Math.round()</strong> - Convert decimals to integers</li>
+                    <li><strong>Comparison operators</strong> - Use ==, <, > to compare values</li>
+                    <li><strong>if/else if/else statements</strong> - Handle multiple conditions</li>
+                    <li><strong>Input handling</strong> - Get user input from text fields</li>
+                    <li><strong>DOM manipulation</strong> - Update messages based on guesses</li>
+                    <li><strong>Feedback loops</strong> - Provide helpful hints (too high/too low)</li>
+                </ul>
+            </div>
+
+            <div class="game-section">
+                <h2>🎮 Play the Game</h2>
+                <p>Try the number guessing game below. The computer picks a secret number between 0 and 9, and you try to guess it! You'll get hints telling you if your guess is too high or too low.</p>
+                <p><strong>💡 Hint:</strong> The game uses if/else if/else logic to provide three different outcomes: correct guess, too low, or too high!</p>
+                
+                <div class="iframe-container">
+                    <iframe src="games/NumberGuess.html" title="Number Guess Game"></iframe>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>🤔 Questions to Think About</h3>
+                <p><strong>1.</strong> How does the game pick a random number between 0 and 9?</p>
+                <p><strong>2.</strong> What are the three possible outcomes when you make a guess?</p>
+                <p><strong>3.</strong> Why does the game compare with < and > instead of just ==?</p>
+                <p><strong>4.</strong> How does the game get your input from the text field?</p>
+                <p><strong>5.</strong> What would happen if the secret number is 5 and you guess 3, then 7?</p>
+                
+                <button class="answer-button" onclick="showAnswer()">Show Answer</button>
+            </div>
+
+            <div class="code-section" id="codeSection">
+                <h4>💻 The Code Behind the Game</h4>
+                <textarea class="code-textarea" readonly>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Number</title>
+</head>
+<body>
+  <h1>🎯 Guess the Number!</h1>
+  <p>I'm thinking of a number between 0 and 9.</p>
+
+  <input id="guess" type="number" min="0" max="9">
+  <button onclick="checkGuess()">Guess</button>
+
+  <p id="message"></p>
+
+  <script>
+    // Pick a random number between 0 and 9
+    // Math.random() generates a decimal between 0 and 1
+    // Multiply by 10 to get 0-10, then Math.round() to get 0-9
+    let secret = Math.round(Math.random() * 10);
+
+    function checkGuess() {
+      // Get the player's guess from the input field and convert to number
+      let guess = document.getElementById("guess").value;
+
+      // Check three different conditions:
+      // 1. If guess equals secret
+      if (guess == secret) {
+        document.getElementById("message").innerText = "🎉 Correct! You guessed it!";
+      }
+      // 2. If guess is less than secret
+      else if (guess < secret) {
+        document.getElementById("message").innerText = "Too low! Try again.";
+      }
+      // 3. If guess is greater than secret (else covers all remaining cases)
+      else {
+        document.getElementById("message").innerText = "Too high! Try again.";
+      }
+    }
+  </script>
+</body>
+</html>
+
+// Key Points:
+// 1. Math.random() generates a decimal from 0 to 0.999...
+// 2. Multiply by 10 to scale it to the range 0 to 9.99...
+// 3. Math.round() rounds to the nearest integer (0-9 or 10)
+// 4. The if/else if/else structure handles three mutually exclusive outcomes
+// 5. Comparison operators: == (equal), < (less than), > (greater than)
+// 6. document.getElementById("guess").value gets text input from the HTML field
+// 7. The input is automatically converted to a number for comparison
+// 8. Each branch provides meaningful feedback to guide the player
+// 9. The secret is generated once and persists until the page reloads
+// 10. This teaches control flow: how multiple conditions affect program behavior
+                </textarea>
+            </div>
+
+            <div class="question-section">
+                <h3>🎯 Try This Challenge</h3>
+                <p>Modify the game to make it more interesting! Try:</p>
+                <ul>
+                    <li>Extend the range from 0-9 to 0-99 or 1-100</li>
+                    <li>Count how many guesses it takes to get the correct number</li>
+                    <li>Add a "Give Up" button that reveals the secret number</li>
+                    <li>Disable the input after getting the correct answer</li>
+                    <li>Add a "Play Again" button to start a new game</li>
+                    <li>Track the best score (fewest guesses)</li>
+                    <li>Add difficulty levels with different ranges</li>
+                    <li>Add more specific hints like "very close!" when within 1</li>
+                    <li>Set a maximum number of guesses allowed</li>
+                    <li>Show remaining guesses or hint about the range</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAnswer() {
+            const codeSection = document.getElementById('codeSection');
+            const button = document.querySelector('.answer-button');
+            
+            if (codeSection.classList.contains('show')) {
+                codeSection.classList.remove('show');
+                button.textContent = 'Show Answer';
+            } else {
+                codeSection.classList.add('show');
+                button.textContent = 'Hide Answer';
+            }
+        }
+    </script>
+</body>
+</html>
