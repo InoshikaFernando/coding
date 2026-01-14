@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>If Conditions Game - JavaScript Practice</title>
+    <title>Treasure Hunt Game - JavaScript Practice</title>
     <style>
         * {
             margin: 0;
@@ -211,39 +211,47 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔄 If Conditions Game</h1>
-            <p>Learn single if-else statements through interactive gameplay</p>
+            <h1>💰 Treasure Hunt Game 🪙</h1>
+            <p>Learn conditional statements, loops, and DOM manipulation through an interactive treasure hunt</p>
         </div>
 
         <div class="content">
-            <a href="../index.html" class="back-link">← Back to Games</a>
+            <a href="index.html" class="back-link">← Back to Games</a>
 
             <div class="concept-explanation">
-                <h3>📚 What are If Conditions?</h3>
+                <h3>📚 What You'll Learn</h3>
                 <ul>
-                    <li><strong>If statements</strong> allow your code to make decisions</li>
-                    <li>They check if a condition is true or false</li>
-                    <li>If true, one block of code runs; if false, another block runs</li>
-                    <li>Perfect for creating interactive and responsive programs</li>
+                    <li><strong>If statements</strong> - Allow your code to make decisions</li>
+                    <li><strong>Conditional logic</strong> - Check if a condition is true or false</li>
+                    <li><strong>If-else statements</strong> - If true, one block runs; if false, another block runs</li>
+                    <li><strong>For loops</strong> - Repeat code a specific number of times</li>
+                    <li><strong>Math.random()</strong> - Generate random numbers between 0 and 1</li>
+                    <li><strong>Math.floor()</strong> - Round down to the nearest whole number</li>
+                    <li><strong>Comparison operators</strong> - Use === (strict equality) to compare values</li>
+                    <li><strong>DOM manipulation</strong> - Create and modify HTML elements dynamically</li>
+                    <li><strong>Event handlers</strong> - Respond to user clicks and interactions</li>
                 </ul>
             </div>
 
             <div class="game-section">
                 <h2>🎮 Play the Game</h2>
-                <p>Try the dice roll game below. Notice how it uses an if-else statement to determine the winner!</p>
-                <p><strong>💡 Hint:</strong> The computer generates a random number between 1-6. If that number is greater than 3, you win! Otherwise, the computer wins.</p>
+                <p>Try the Treasure Hunt game below. Notice how it uses Math.random(), for loops, if-else statements, and DOM manipulation!</p>
+                <p><strong>💡 Hint:</strong> The game randomly picks a treasure box (1, 2, or 3), creates 3 chests using a for loop, and uses an if-else statement to check if you found the treasure!</p>
                 
                 <div class="iframe-container">
-                    <iframe src="games/dice-roll.html" title="Dice Roll Game"></iframe>
+                    <iframe src="games/treasure-hunt-game.html" title="Treasure Hunt Game"></iframe>
                 </div>
             </div>
 
             <div class="question-section">
                 <h3>🤔 Questions to Think About</h3>
-                <p><strong>1.</strong> What happens when you roll a 1, 2, or 3? What about 4, 5, or 6?</p>
-                <p><strong>2.</strong> Can you identify the condition being checked in the if statement?</p>
-                <p><strong>3.</strong> What would happen if we changed the condition from <code>dice > 3</code> to <code>dice >= 3</code>?</p>
-                <p><strong>4.</strong> How does the <code>Math.random()</code> function work to generate random numbers between 1 and 6?</p>
+                <p><strong>1.</strong> How does the game randomly pick which chest contains the treasure?</p>
+                <p><strong>2.</strong> What does the for loop do? How many times does it run?</p>
+                <p><strong>3.</strong> Can you identify the condition being checked in the if statement?</p>
+                <p><strong>4.</strong> What happens when you click a chest that doesn't have the treasure?</p>
+                <p><strong>5.</strong> How does <code>document.createElement()</code> create new HTML elements?</p>
+                <p><strong>6.</strong> What does <code>appendChild()</code> do?</p>
+                <p><strong>7.</strong> Why do we use <code>===</code> instead of <code>==</code> for comparison?</p>
                 
                 <button class="answer-button" onclick="showAnswer()">Show Answer</button>
             </div>
@@ -255,72 +263,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dice Roll Game</title>
+  <title>Treasure Hunt Game</title>
   <style>
     body {
       text-align: center;
-      font-family: Arial, sans-serif;
-      background-color: lightcyan;
-      margin-top: 100px;
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(to bottom, #fff0b3, #ffd480);
     }
 
-    button {
-      font-size: 20px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background-color: darkblue;
-      color: white;
+    h1 {
+      color: #b37400;
+    }
+
+    #gameArea {
+      margin-top: 30px;
+    }
+
+    .chest {
+      display: inline-block;
+      font-size: 60px;
+      margin: 20px;
       cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    #result {
+    .chest:hover {
+      transform: scale(1.2);
+    }
+
+    #message {
       font-size: 24px;
+      color: #333;
       margin-top: 20px;
+    }
+
+    #startBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff9900;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #startBtn:hover {
+      background-color: #ffb84d;
     }
   </style>
 </head>
 <body>
-  <h1>🎲 Dice Roll Game</h1>
-  <p>Click the button to roll the dice!</p>
+  <h1>💰 Treasure Hunt Game 🪙</h1>
+  <p>Click a chest to find the treasure!</p>
 
-  <button onclick="rollDice()">Roll</button>
-  <p id="result"></p>
+  <button id="startBtn" onclick="startGame()">Start Game</button>
+
+  <div id="gameArea"></div>
+  <p id="message"></p>
 
   <script>
-    function rollDice() {
-      let dice = Math.floor(Math.random() * 6) + 1; // random 1–6
-      let message = "You rolled a " + dice + ". ";
+    let treasureBox = 0;
 
-      if (dice > 3) {
-        message += "🎉 You win!";
-      } else {
-        message += "💻 Computer wins!";
+    function startGame() {
+      // Hide the start button
+      document.getElementById("startBtn").style.display = "none";
+
+      document.getElementById("gameArea").innerHTML = "";
+      document.getElementById("message").innerText = "";
+      treasureBox = Math.floor(Math.random() * 3) + 1; // pick 1, 2, or 3
+
+      // Create 3 treasure chests
+      for (let i = 1; i <= 3; i++) {
+        let chest = document.createElement("div");
+        chest.innerHTML = "🧰";
+        chest.classList.add("chest");
+        chest.onclick = function() {
+          checkChest(i);
+        };
+        document.getElementById("gameArea").appendChild(chest);
       }
+    }
 
-      document.getElementById("result").innerText = message;
+    function checkChest(chestNumber) {
+      if (chestNumber === treasureBox) {
+        document.getElementById("message").innerText = "🎉 You found the treasure! 💰";
+      } else {
+        document.getElementById("message").innerText = "💨 Oops! This chest is empty. Try again!";
+      }
     }
   </script>
 </body>
 </html>
 
 // Key Points:
-// 1. Math.random() generates a number between 0 and 1
-// 2. Math.floor() rounds down to the nearest integer
-// 3. The condition (dice > 3) checks if dice is greater than 3
-// 4. If true: player wins, If false: computer wins
-// 5. The else block runs when the condition is false
+// 1. Math.random() * 3 gives us 0 to 2.999...
+// 2. Math.floor() rounds down: 0.0-0.999 → 0, 1.0-1.999 → 1, 2.0-2.999 → 2
+// 3. Adding 1 shifts the range from 0-2 to 1-3 (treasure box numbers)
+// 4. The for loop runs 3 times (i = 1, 2, 3)
+// 5. document.createElement("div") creates a new HTML div element
+// 6. .innerHTML sets the content inside the element (the chest emoji)
+// 7. .classList.add() adds a CSS class to style the element
+// 8. .onclick assigns an event handler function to run when clicked
+// 9. .appendChild() adds the element to the page (inside gameArea)
+// 10. The if statement checks if chestNumber === treasureBox (strict equality)
+// 11. === checks both value AND type, while == only checks value
+// 12. .innerText updates the text content of the message element
+// 13. .style.display = "none" hides the start button
                 </textarea>
             </div>
 
             <div class="question-section">
                 <h3>🎯 Try This Challenge</h3>
-                <p>Modify the game to make it fairer! Instead of winning when dice > 3, try:</p>
+                <p>Enhance the game with these modifications:</p>
                 <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>Win on even numbers (2, 4, 6)</li>
-                    <li>Win on odd numbers (1, 3, 5)</li>
-                    <li>Win only on 6</li>
-                    <li>Win on numbers greater than 4</li>
+                    <li>Add a score counter (track how many treasures you find)</li>
+                    <li>Add more chests (change from 3 to 5 or 10)</li>
+                    <li>Add a "Play Again" button after finding the treasure</li>
+                    <li>Show which chests you've already checked</li>
+                    <li>Add a hint system (tell if treasure is in first half or second half)</li>
+                    <li>Limit the number of guesses before game over</li>
                 </ul>
             </div>
         </div>
@@ -342,3 +404,4 @@
     </script>
 </body>
 </html>
+
