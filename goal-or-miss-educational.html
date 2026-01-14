@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal or Miss Game - JavaScript Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .game-section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #2ecc71;
+        }
+
+        .game-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        .iframe-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .question-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .question-section h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .question-section p {
+            color: #856404;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .question-section ul {
+            color: #856404;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .question-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .answer-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .answer-button:hover {
+            background: #218838;
+        }
+
+        .answer-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .code-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .code-section.show {
+            display: block;
+        }
+
+        .code-section h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .code-textarea {
+            width: 100%;
+            height: auto;
+            min-height: 800px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #2d3748;
+            color: #e2e8f0;
+            border: none;
+            border-radius: 6px;
+            padding: 15px;
+            resize: none;
+            line-height: 1.5;
+            overflow: visible;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #5a6268;
+        }
+
+        .concept-explanation {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .concept-explanation h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .concept-explanation ul {
+            color: #0066cc;
+            margin-left: 20px;
+        }
+
+        .concept-explanation li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ Goal or Miss Game</h1>
+            <p>Learn probability, random numbers, and variable tracking through interactive gameplay</p>
+        </div>
+
+        <div class="content">
+            <a href="../index.html" class="back-link">← Back to Games</a>
+
+            <div class="concept-explanation">
+                <h3>📚 What You'll Learn</h3>
+                <ul>
+                    <li><strong>Math.random()</strong> - Generates random numbers for probability outcomes</li>
+                    <li><strong>Conditional statements (if/else)</strong> - Makes decisions based on probability</li>
+                    <li><strong>Variable tracking</strong> - Keeps score and counts shots</li>
+                    <li><strong>DOM manipulation</strong> - Updates text and displays results</li>
+                    <li><strong>Event handling</strong> - Responds to button clicks</li>
+                    <li><strong>Probability concepts</strong> - Understanding 50/50 chance outcomes</li>
+                </ul>
+            </div>
+
+            <div class="game-section">
+                <h2>🎮 Play the Game</h2>
+                <p>Try the goal or miss game below. Each kick has a 50% chance of scoring. The game tracks your goals and total shots!</p>
+                <p><strong>💡 Hint:</strong> The game uses Math.random() to generate a number between 0 and 1. If it's greater than 0.5, you score a goal. Otherwise, you miss!</p>
+                
+                <div class="iframe-container">
+                    <iframe src="games/goal_or_miss.html" title="Goal or Miss Game"></iframe>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>🤔 Questions to Think About</h3>
+                <p><strong>1.</strong> How does Math.random() determine if you score or miss?</p>
+                <p><strong>2.</strong> Why is the threshold set at 0.5 instead of other numbers?</p>
+                <p><strong>3.</strong> What would happen if you changed the condition from > 0.5 to > 0.3?</p>
+                <p><strong>4.</strong> How does the game track both goals and total shots?</p>
+                <p><strong>5.</strong> What DOM elements are being updated when you click the button?</p>
+                
+                <button class="answer-button" onclick="showAnswer()">Show Answer</button>
+            </div>
+
+            <div class="code-section" id="codeSection">
+                <h4>💻 The Code Behind the Game</h4>
+                <textarea class="code-textarea" readonly>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Goal or Miss - Score Version</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: lightgreen;
+      margin-top: 80px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      background-color: darkgreen;
+      color: white;
+      cursor: pointer;
+    }
+
+    #message {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 22px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚽ Goal or Miss</h1>
+  <p>Click the button to take your shot!</p>
+
+  <button onclick="shoot()">Kick!</button>
+  <p id="message"></p>
+  <p id="score">Score: 0 | Shots: 0</p>
+
+  <script>
+    // Variables to track the game state
+    let goals = 0;      // Count of successful goals
+    let shots = 0;      // Total number of shots taken
+
+    function shoot() {
+      // Increment the shots counter
+      shots++;
+      
+      // Generate a random number between 0 and 1
+      let chance = Math.random();
+
+      // Check if the random number is greater than 0.5 (50% probability)
+      if (chance > 0.5) {
+        goals++;
+        document.getElementById("message").innerText = "🎯 GOAL! You scored!";
+      } else {
+        document.getElementById("message").innerText = "❌ Missed! Try again!";
+      }
+
+      // Update the score display with current stats
+      document.getElementById("score").innerText = "Score: " + goals + " | Shots: " + shots;
+    }
+  </script>
+</body>
+</html>
+
+// Key Points:
+// 1. Math.random() generates a decimal number between 0 (inclusive) and 1 (exclusive)
+// 2. Checking if chance > 0.5 gives a 50% probability for either outcome
+// 3. The 'goals' and 'shots' variables track the game state persistently
+// 4. Each button click calls the shoot() function which:
+//    - Increments the shots counter
+//    - Generates a random outcome
+//    - Updates the message based on the result
+//    - Updates the score display
+// 5. DOM manipulation uses innerText to update the #message and #score elements
+// 6. The score persists across multiple clicks because variables retain their values
+// 7. Simple if/else logic makes this a great starter for probability concepts
+                </textarea>
+            </div>
+
+            <div class="question-section">
+                <h3>🎯 Try This Challenge</h3>
+                <p>Modify the game to make it more interesting! Try:</p>
+                <ul>
+                    <li>Change the probability threshold (e.g., > 0.3 for easier, > 0.7 for harder)</li>
+                    <li>Add difficulty levels with different probabilities</li>
+                    <li>Calculate and display the success rate (goals / shots)</li>
+                    <li>Add a reset button to start a new game</li>
+                    <li>Create different shot types with different success rates</li>
+                    <li>Add sound effects for goals and misses</li>
+                    <li>Show a "hot streak" counter for consecutive goals</li>
+                    <li>Track and display the best score in localStorage</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAnswer() {
+            const codeSection = document.getElementById('codeSection');
+            const button = document.querySelector('.answer-button');
+            
+            if (codeSection.classList.contains('show')) {
+                codeSection.classList.remove('show');
+                button.textContent = 'Show Answer';
+            } else {
+                codeSection.classList.add('show');
+                button.textContent = 'Hide Answer';
+            }
+        }
+    </script>
+</body>
+</html>
