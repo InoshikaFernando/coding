@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Light Game</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f3f5;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #343a40;
+    }
+
+    .buttons button {
+      padding: 15px 25px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      width: 90px;
+      height: 90px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .green {
+      background: #51cf66;
+    }
+
+    .yellow {
+      background: #fcc419;
+      color: black;
+    }
+
+    .red {
+      background: #ff6b6b;
+    }
+
+    .reset {
+      background: #868e96;
+      border-radius: 10px;
+      width: auto;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .scoreboard {
+      margin-top: 25px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚦 Traffic Light Challenge</h1>
+  <p>Choose the best traffic light!</p>
+
+  <div class="buttons">
+    <button class="green" onclick="play('green')">Green</button>
+    <button class="yellow" onclick="play('yellow')">Yellow</button>
+    <button class="red" onclick="play('red')">Red</button>
+  </div>
+
+  <p id="result"></p>
+
+  <div class="scoreboard">
+    <p>✅ Correct: <span id="wins">0</span></p>
+    <p>❌ Wrong: <span id="losses">0</span></p>
+    <p>🤝 Draws: <span id="draws">0</span></p>
+  </div>
+
+  <button class="reset" onclick="resetGame()">Reset 🔁</button>
+
+  <script>
+    let wins = 0;
+    let losses = 0;
+    let draws = 0;
+
+    function play(playerLight) {
+
+      // 🗂 Array of lights
+      const lights = ["green", "yellow", "red"];
+
+      // 🎲 Random computer choice
+      const computerLight = lights[Math.floor(Math.random() * 3)];
+
+      let message = "You chose " + playerLight +
+                    ". Computer chose " + computerLight + ". ";
+
+      // 🤝 Draw
+      if (playerLight === computerLight) {
+        message += "It's a draw 🤝";
+        draws++;
+      }
+
+      // 🎉 Player wins
+      else if (
+        (playerLight === "green" && computerLight === "red") ||
+        (playerLight === "red" && computerLight === "yellow") ||
+        (playerLight === "yellow" && computerLight === "green")
+      ) {
+        message += "🎉 You made the right choice!";
+        wins++;
+      }
+
+      // ❌ Player loses
+      else {
+        message += "🚫 That was the wrong choice!";
+        losses++;
+      }
+
+      document.getElementById("result").innerText = message;
+      updateScore();
+    }
+
+    function updateScore() {
+      document.getElementById("wins").innerText = wins;
+      document.getElementById("losses").innerText = losses;
+      document.getElementById("draws").innerText = draws;
+    }
+
+    function resetGame() {
+      wins = 0;
+      losses = 0;
+      draws = 0;
+
+      document.getElementById("result").innerText =
+        "Game reset! Pick a light 🚦";
+
+      updateScore();
+    }
+  </script>
+
+</body>
+</html>
